@@ -9,9 +9,15 @@ const FILE = './leaderboard.json';
 app.use(cors());
 app.use(express.json());
 
-app.get('/', (req, res) => {
-  res.send('Сервер работает!');
+app.get('/leaderboard-server', (req, res) => {
+  if (!fs.existsSync(FILE)) {
+    return res.json([]);
+  }
+
+  const data = JSON.parse(fs.readFileSync(FILE, 'utf-8'));
+  res.json(data);
 });
+
 
 app.post('/save-score', (req, res) => {
     const { name, score } = req.body;
