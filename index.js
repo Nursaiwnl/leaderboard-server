@@ -30,6 +30,7 @@ app.post('/save-score', (req, res) => {
     res.sendStatus(200);
 });
 
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`Сервер запущен на порту ${PORT}`);
 });
+
