@@ -9,7 +9,7 @@ const FILE = './leaderboard.json';
 app.use(cors());
 app.use(express.json());
 
-app.get('/leaderboard-server', (req, res) => {
+app.get('/leaderboard', (req, res) => {
   if (!fs.existsSync(FILE)) {
     return res.json([]);
   }
