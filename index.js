@@ -10,13 +10,14 @@ app.use(cors());
 app.use(express.json());
 
 app.get('/leaderboard', (req, res) => {
-  if (!fs.existsSync(FILE)) {
-    return res.json([]);
+  if (fs.existsSync(FILE)) {
+    const data = JSON.parse(fs.readFileSync(FILE, 'utf-8'));
+    res.json(data);
+  } else {
+    res.status(404).send('Leaderboard not found');
   }
-
-  const data = JSON.parse(fs.readFileSync(FILE, 'utf-8'));
-  res.json(data);
 });
+
 
 
 app.post('/save-score', (req, res) => {
