@@ -2,20 +2,15 @@ const express = require('express');
 const fs = require('fs');
 const cors = require('cors');
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 10000;
 
 const FILE = './leaderboard.json';
 
 app.use(cors());
 app.use(express.json());
 
-app.get('/leaderboard', (req, res) => {
-    if (fs.existsSync(FILE)) {
-        const data = JSON.parse(fs.readFileSync(FILE, 'utf-8'));
-        res.json(data);
-    } else {
-        res.json([]);
-    }
+app.get('/', (req, res) => {
+  res.send('Сервер работает!');
 });
 
 app.post('/save-score', (req, res) => {
@@ -35,4 +30,6 @@ app.post('/save-score', (req, res) => {
     res.sendStatus(200);
 });
 
-app.listen(PORT, () => console.log(`Сервер запущен на порту ${PORT}`));
+app.listen(PORT, () => {
+  console.log(`Сервер запущен на порту ${PORT}`);
+});
